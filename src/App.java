@@ -1,5 +1,11 @@
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+
+import Ejercicios.contorllers.Laberinto;
+import Ejercicios.models.Celda;
+import Ejercicios.contorllers.*;
 
 public class App {
     public static void main(String[] args) throws Exception {
@@ -11,23 +17,21 @@ public class App {
         endtime = System.nanoTime();
         System.out.println("Time taken: " + (endtime - startime) + " ns");
         System.out.print(String.format("Time taken: %.9f s", (endtime - startime) / 1_000_000_000.0));
-        System.out.println();
 
         startime = System.nanoTime();
         System.out.println(fibonacciWithCaching(40));
         endtime = System.nanoTime();
         System.out.println("Time taken: " + (endtime - startime) + " ns");
         System.out.print(String.format("Time taken: %.9f s", (endtime - startime) / 1_000_000_000.0));
-        System.out.println();
 
-        startime = System.nanoTime();
         System.out.println(fibonacciCaching(40));
         endtime = System.nanoTime();
         System.out.println("Time taken: " + (endtime - startime) + " ns");
         System.out.print(String.format("Time taken: %.9f s", (endtime - startime) / 1_000_000_000.0));
 
         /// Ejericio 1
-        // runEjercicio();
+        System.out.println();
+         runEjercicio();
 
     }
 
@@ -74,14 +78,19 @@ public class App {
         return cache[n];
     }
 
+
     public static void runEjercicio() {
-
-        // boolean[][] grid = {
-        // { true, true, true, true },
-        // { false, false, false, true },
-        // { true, true, false, true },
-        // { true, true, false, true }
-        // };
-
+        boolean[][] grid = {
+                { true, true, true, true },
+                { false, false, false, true },
+                { true, true, false, true },
+                { true, true, false, true }
+        };
+        Laberinto laberinto = new Laberinto();
+        List<Celda> path = laberinto.getPath(grid);
+        System.out.println("Camino encontrado en el laberinto:");
+        for (int i = path.size() - 1; i >= 0; i--) {
+            System.out.print(path.get(i) + (i > 0 ? " -> " : "\n"));
+        }
     }
 }
